@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CoachOS Fitness Platform Skeleton</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">CO</div>
+        <div>
+          <strong>CoachOS</strong>
+          <span>Performance coaching platform</span>
+        </div>
+      </div>
+      <nav class="main-nav" aria-label="Primary">
+        <button class="nav-button active" data-view="command">Coach cockpit</button>
+        <button class="nav-button" data-view="program">Program builder</button>
+        <button class="nav-button" data-view="analytics">Trends</button>
+        <button class="nav-button" data-view="client">Athlete app</button>
+        <button class="nav-button" data-view="ai">AI workbench</button>
+        <button class="nav-button" data-view="market">Market gaps</button>
+      </nav>
+      <div class="coach-card">
+        <span class="eyebrow">Coach workspace</span>
+        <strong>Maya Santos</strong>
+        <p>42 athletes, 4 teams, hybrid strength and nutrition coaching.</p>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <span class="eyebrow">Skeleton demo</span>
+          <h1 id="view-title">Coach cockpit</h1>
+        </div>
+        <div class="top-actions">
+          <label class="search-label" for="athlete-search">Search</label>
+          <input id="athlete-search" type="search" placeholder="Find athlete, lift, block, note">
+          <button class="primary-action" id="simulate-ai">Suggest next week</button>
+        </div>
+      </header>
+
+      <section class="view active" id="view-command">
+        <div class="coach-grid">
+          <section class="panel roster-panel">
+            <div class="panel-head">
+              <div>
+                <span class="eyebrow">Roster</span>
+                <h2>Athletes needing attention</h2>
+              </div>
+              <span class="badge danger">7 flags</span>
+            </div>
+            <div class="athlete-list" id="athlete-list"></div>
+          </section>
+
+          <section class="panel programming-panel">
+            <div class="panel-head">
+              <div>
+                <span class="eyebrow">One-screen update loop</span>
+                <h2 id="selected-athlete-title">Jamal Reed - Week 5</h2>
+              </div>
+              <div class="segmented" role="group" aria-label="Week selection">
+                <button class="segment active">W4 actual</button>
+                <button class="segment">W5 draft</button>
+                <button class="segment">History</button>
+              </div>
+            </div>
+
+            <div class="update-workspace">
+              <div class="subpanel">
+                <div class="subpanel-head">
+                  <strong>Previous week inputs</strong>
+                  <span class="muted">auto-summarized</span>
+                </div>
+                <ul class="signal-list" id="input-signals"></ul>
+              </div>
+
+              <div class="subpanel">
+                <div class="subpanel-head">
+                  <strong>Next week program draft</strong>
+                  <span class="muted">editable</span>
+                </div>
+                <table class="program-table">
+                  <thead>
+                    <tr>
+                      <th>Day</th>
+                      <th>Focus</th>
+                      <th>Main lift</th>
+                      <th>Prescription</th>
+                      <th>Coach note</th>
+                    </tr>
+                  </thead>
+                  <tbody id="program-rows"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="decision-strip">
+              <div>
+                <strong>Coach decision</strong>
+                <span id="coach-decision">Repeat bench top load, trim overhead pressing, increase rows.</span>
+              </div>
+              <button class="secondary-action">Approve week</button>
+              <button class="ghost-action">Send note</button>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="view" id="view-program">
+        <div class="builder-layout">
+          <section class="panel library-panel">
+            <div class="panel-head">
+              <div>
+                <span class="eyebrow">Reusable systems</span>
+                <h2>Exercise and block library</h2>
+              </div>
+              <span class="badge">3,200 movements</span>
+            </div>
+            <div class="library-stack">
+              <button class="library-item active">Strength block - upper push</button>
+              <button class="library-item">Hypertrophy density block</button>
+              <button class="library-item">Return from shoulder irritation</button>
+              <button class="library-item">Team speed warmup</button>
+              <button class="library-item">Nutrition check-in template</button>
+            </div>
+          </section>
+
+          <section class="panel builder-panel">
+            <div class="panel-head">
+              <div>
+                <span class="eyebrow">Fast programming</span>
+                <h2>Week-to-week progression editor</h2>
+              </div>
+              <div class="toolbar">
+                <button class="ghost-action">Import</button>
+                <button class="ghost-action">Clone week</button>
+                <button class="primary-action">Apply progression</button>
+              </div>
+            </div>
+            <div class="week-grid">
+              <article class="day-card">
+                <strong>Monday</strong>
+                <span>Lower strength</span>
+                <p>Back squat 5x3 @ 82%, RDL 4x6, split squat 3x8.</p>
+              </article>
+              <article class="day-card">
+                <strong>Wednesday</strong>
+                <span>Upper volume</span>
+                <p>Bench 4x6 @ 75%, row 5x8, incline DB press 3x10.</p>
+              </article>
+              <article class="day-card">
+                <strong>Friday</strong>
+                <span>Milestone</span>
+                <p>Bench 90kg x 5 attempt, accessories capped at RPE 7.</p>
+              </article>
+              <article class="day-card">
+                <strong>Saturday</strong>
+                <span>Conditioning</span>
+                <p>Zone 2 35 min, mobility 12 min, nutrition check-in.</p>
+              </article>
+            </div>
+            <div class="inline-editor">
+              <label for="coach-notes">Coach notes for this week</label>
+              <textarea id="coach-notes">Keep pressing quality high. If shoulder tightness is above 3/10, swap incline DB press for neutral-grip machine press.</textarea>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="view" id="view-analytics">
+        <div class="analytics-grid">
+          <section class="panel wide-panel">
+            <div class="panel-head">
+              <div>
+                <span class="eyebrow">Team visibility</span>
+                <h2>Performance and adherence trends</h2>
+              </div>
+              <span class="badge">12 week view</span>
+            </div>
+            <div class="chart-row" aria-label="Trend bars">
+              <div class="bar" style="--h: 62%"><span>W1</span></div>
+              <div class="bar" style="--h: 68%"><span>W2</span></div>
+              <div class="bar" style="--h: 71%"><span>W3</span></div>
+              <div class="bar warning" style="--h: 50%"><span>W4</span></div>
+              <div class="bar" style="--h: 76%"><span>W5</span></div>
+              <div class="bar" style="--h: 82%"><span>W6</span></div>
+              <div class="bar" style="--h: 79%"><span>W7</span></div>
+              <div class="bar" style="--h: 85%"><span>W8</span></div>
+            </div>
+          </section>
+          <section class="panel">
+            <div class="panel-head"><h2>Signals worth surfacing</h2></div>
+            <ul class="signal-list">
+              <li><strong>Readiness falling:</strong> 5 athletes below baseline for 3 days.</li>
+              <li><strong>Progress stalled:</strong> 3 bench programs need progression review.</li>
+              <li><strong>Team trend:</strong> posterior chain volume up 14% with no soreness spike.</li>
+            </ul>
+          </section>
+          <section class="panel">
+            <div class="panel-head"><h2>Coachable metrics</h2></div>
+            <div class="metric-grid">
+              <div class="metric"><strong>88%</strong><span>session completion</span></div>
+              <div class="metric"><strong>+9%</strong><span>strength trend</span></div>
+              <div class="metric"><strong>11</strong><span>media reviews</span></div>
+              <div class="metric"><strong>6</strong><span>nutrition flags</span></div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="view" id="view-client">
+        <div class="client-layout">
+          <section class="phone-shell" aria-label="Athlete mobile preview">
+            <div class="phone-screen">
+              <div class="phone-top">
+                <span>9:41</span>
+                <span>82%</span>
+              </div>
+              <div class="phone-title">
+                <span class="eyebrow">Today</span>
+                <h2>Upper volume</h2>
+                <p>Coach Maya updated your plan based on last week.</p>
+              </div>
+              <div class="phone-card">
+                <strong>Bench press</strong>
+                <span>4 sets x 6 reps @ 75%</span>
+                <div class="set-grid">
+                  <button>70 x 6</button>
+                  <button>72.5 x 6</button>
+                  <button class="active">75 x 6</button>
+                  <button>Log</button>
+                </div>
+              </div>
+              <div class="phone-card">
+                <strong>Quick check-in</strong>
+                <span>Sleep 6h 40m · soreness shoulder 1/10</span>
+              </div>
+              <div class="phone-nav">
+                <button class="active">Train</button>
+                <button>Food</button>
+                <button>Chat</button>
+                <button>Stats</button>
+              </div>
+            </div>
+          </section>
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <span class="eyebrow">Athlete experience</span>
+                <h2>Client-side requirements</h2>
+              </div>
+            </div>
+            <ul class="signal-list">
+              <li><strong>Low-friction logging:</strong> prior week values visible during every set.</li>
+              <li><strong>Flexible adherence:</strong> missed days become reschedule prompts, not guilt loops.</li>
+              <li><strong>Media feedback:</strong> video, photo, and voice notes tied to a session or exercise.</li>
+              <li><strong>Nutrition without overload:</strong> food photos, macros, habits, and coach review queue.</li>
+            </ul>
+          </section>
+        </div>
+      </section>
+
+      <section class="view" id="view-ai">
+        <div class="ai-layout">
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <span class="eyebrow">Coach-assist AI</span>
+                <h2>Useful, bounded automation</h2>
+              </div>
+              <span class="badge">coach approves</span>
+            </div>
+            <div class="prompt-box">
+              <label for="ai-prompt">Ask across programming history</label>
+              <textarea id="ai-prompt">Pull up Jamal's most successful bench-focused block from the last 6 months and suggest a similar progression for the next 4 weeks.</textarea>
+              <button class="primary-action" id="run-query">Run search</button>
+            </div>
+          </section>
+          <section class="panel">
+            <div class="panel-head"><h2>AI output queue</h2></div>
+            <div id="ai-output" class="ai-output">
+              <p><strong>Suggested:</strong> repeat the March accumulation block pattern, but cap overhead pressing because shoulder soreness appeared this week.</p>
+              <p><strong>Evidence:</strong> best 4-week bench response came after volume rose 8-12%, sleep stayed above 7h, and RPE stayed below 8.5.</p>
+              <p><strong>Coach action:</strong> approve, edit, or dismiss. Nothing is assigned automatically.</p>
+            </div>
+          </section>
+          <section class="panel wide-panel">
+            <div class="panel-head"><h2>Import formatter</h2><span class="badge">spreadsheet / PDF / notes</span></div>
+            <div class="import-preview">
+              <div>
+                <strong>Raw upload</strong>
+                <p>Mon: SQ 5x3 82%, RDL 4x6, SL split squat 3x8. Wed upper vol...</p>
+              </div>
+              <div>
+                <strong>Structured draft</strong>
+                <p>Parsed into days, blocks, exercises, prescriptions, alternatives, and coach notes.</p>
+              </div>
+              <div>
+                <strong>Review required</strong>
+                <p>Coach confirms ambiguous items before assignment.</p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="view" id="view-market">
+        <div class="market-grid">
+          <section class="panel wide-panel">
+            <div class="panel-head">
+              <div>
+                <span class="eyebrow">Opportunity thesis</span>
+                <h2>Where this app can stand apart</h2>
+              </div>
+            </div>
+            <div class="opportunity-grid">
+              <article>
+                <strong>History-in-context programming</strong>
+                <p>Coach updates next week while seeing the prior week, readiness, notes, and progressions in one view.</p>
+              </article>
+              <article>
+                <strong>Coach-owned methodology</strong>
+                <p>Custom metrics, progression rules, templates, and language adapt to the coach instead of forcing one training philosophy.</p>
+              </article>
+              <article>
+                <strong>AI as an assistant, not the coach</strong>
+                <p>Format imports, summarize inputs, search history, and draft suggestions with approval gates.</p>
+              </article>
+              <article>
+                <strong>Scales from 1:1 to teams</strong>
+                <p>Same data model supports individual coaching, semi-private groups, sport teams, and multi-coach staff.</p>
+              </article>
+            </div>
+          </section>
+          <section class="panel">
+            <div class="panel-head"><h2>Competitor strengths</h2></div>
+            <ul class="signal-list">
+              <li>Bridge Athletic: team performance, robust parameters, AI imports, enterprise strength rooms.</li>
+              <li>TrainHeroic: athlete experience, marketplace, training calendar, video review, chat.</li>
+              <li>Kahunas: affordable all-in-one coaching, workouts, diet, supplements, check-ins.</li>
+              <li>Everfit and HubFit: polished client app, habits, messaging, nutrition, automations.</li>
+            </ul>
+          </section>
+          <section class="panel">
+            <div class="panel-head"><h2>Pain points to attack</h2></div>
+            <ul class="signal-list">
+              <li>Too much clicking to update programs after reviewing athlete data.</li>
+              <li>Previous set history hidden away from the active logging moment.</li>
+              <li>Rigid streaks and generic reminders that create shame instead of adaptation.</li>
+              <li>Data spread across workouts, food, media, chat, and check-ins without a coach decision layer.</li>
+            </ul>
+          </section>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+</html>
